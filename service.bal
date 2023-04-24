@@ -22,7 +22,7 @@ service / on new http:Listener(9090) {
     resource  function get greet(string name) returns Greeting|error {
 
 
-    var setResult = conn->set("tt", "Ballerina");
+    var setResult = conn->set(name, name+"Ballerina");
 
     if (setResult is string) {
         log:printInfo("String value inserted" + setResult);    // setResult is "OK"
@@ -31,7 +31,7 @@ service / on new http:Listener(9090) {
         log:printInfo(setResult.toString());
     }
 
-    var getResult = conn->get("tt");
+    var getResult = conn->get(name);
     if (getResult is string) {
         log:printInfo(getResult);  // getResult is "Ballerina"
     } else if (getResult is ()) {
