@@ -21,12 +21,13 @@ FROM ballerina/jvm-runtime:1.0
 
 FROM adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.19_7
 
+
+
+
 RUN addgroup troupe \
-&& adduser -S -s /bin/bash -g 'ballerina' -G troupe -D 10014 \
-&& apk add --update --no-cache bash \
-&& apk update && apk add --upgrade busybox \ 
-&& chown -R 10014:troupe /opt/java/openjdk/bin/java \
-&& rm -rf /var/cache/apk/*
+   && adduser -S -s /bin/bash -g 'ballerina' -G troupe -D 10014 \
+   && apk add --update --no-cache bash \
+   && rm -rf /var/cache/apk/*
 
 WORKDIR /home/ballerina
 
