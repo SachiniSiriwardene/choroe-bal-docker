@@ -23,26 +23,29 @@ service / on new http:Listener(9090) {
 
 
     var setResult = conn->set(name, name+"Ballerina");
+    Greeting greetingMessage;
 
     if (setResult is string) {
-        log:printInfo("String value inserted" + setResult);    // setResult is "OK"
+        log:printInfo("String value inserted" + setResult);
+       
     } else {
        log:printInfo("Error while set");
-        log:printInfo(setResult.toString());
+       log:printInfo(setResult.toString());
     }
 
     var getResult = conn->get(name);
     if (getResult is string) {
         log:printInfo(getResult);  // getResult is "Ballerina"
+         greetingMessage = {"from" : "Choreo", "to" : name, "message" : getResult.toString()};    // setResult is "OK"
     } else if (getResult is ()) {
         log:printInfo("Key not found");
+          greetingMessage = {"from" : "Choreo", "to" : name, "message" : " "};   
     } else {
         log:printInfo("Error while fetching");
-        log:printInfo(getResult.toString());
+        log:printInfo(getResult.toString());  greetingMessage = {"from" : "Choreo", "to" : name, "message" : getResult.toString()};   
     }
 
-    conn.stop();
-        Greeting greetingMessage = {"from" : "Choreo", "to" : name, "message" : "Welcome to Choreo!"};
+       
         return greetingMessage;
     }
 }
